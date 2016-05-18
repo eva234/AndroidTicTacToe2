@@ -1,16 +1,19 @@
 package com.example.evabrucksch.androidtictactoe2;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TableLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout);
     ImageButton[] buttons = new ImageButton[9];
     int[] field = new int[9];
-    //1 steht für X, 0 steht für O
-    int player = 1;
+    int player = 0; //0 = X, 1 = O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i<9; i++) {
             field[i]=-1;
         }
+
+        //setUpOnClickListeners(tableLayout);
     }
 
-    private void setUpOnClickListeners(View v) {
+    /*private void setUpOnClickListeners(View v) {
         for(int i=0; i<9; i++) {
             buttons[i].setOnClickListener(new PlayOnClick(i));
         }
@@ -48,7 +53,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-
+            Log.i("onClick Test", "button clicked (nmbr)"+btnNumber);
+            if(field[btnNumber] == -1) {
+                if (player == 0) {
+                    field[btnNumber] = 0;
+                    player = 1;
+                }
+                else if (player == 1) {
+                    field[btnNumber] = 1;
+                    player = 0;
+                }
+                buttons[btnNumber].setEnabled(false);
+                buttons[btnNumber].setBackgroundColor(Color.RED);
+                Log.i("button test", "button clicked (nmbr)"+btnNumber);
+            }
         }
-    }
+    }*/
 }
