@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     int[] field = new int[9];
     int player = 0; //0 = X, 1 = O
     int clicked = 0;
+    boolean gameOver = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
     private void theWinnerIs() {
         if(checkForWin(0)){
             Log.i("winner", "The winner is Player 0");
+            gameOver = true;
         } else if(checkForWin(1)) {
             Log.i("winner", "The winner is Player 1");
+            gameOver = true;
         } else if(clicked==9){
             Log.i("winner", "Noone one this round, it's a tie.");
+            gameOver = true;
         } else {
             Log.i("winner", "The game is not over yet.");
         }
@@ -73,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    protected void reset(View view) {
+        for(int i=0; i<9; i++) {
+            field[i] = -1;
+            clicked = 0;
+            gameOver = false;
+            buttons[i].setBackgroundColor(Color.BLACK);
+            buttons[i].setEnabled(true);
+        }
+        setUpOnClickListeners(table);
+        Log.i("reset", "Reset Button clicked");
+    }
+
 
     private class PlayOnClick implements View.OnClickListener {
 
@@ -84,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            if(field[btnNumber] == -1) {
+            if(gameOver == false && field[btnNumber] == -1) {
                 if (player == 0) {
                     field[btnNumber] = 0;
                     player = 1;
