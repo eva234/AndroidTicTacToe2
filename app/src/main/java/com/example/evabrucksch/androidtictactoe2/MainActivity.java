@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     boolean gameOver = false;
     TextView result;
     TextView turn;
-    Drawable background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +31,7 @@ public class MainActivity extends AppCompatActivity {
         turn = (TextView) findViewById(R.id.turn);
         setTexts();
 
-        buttons[0] = (ImageButton) findViewById(R.id.imageButton1);
-        buttons[1] = (ImageButton) findViewById(R.id.imageButton2);
-        buttons[2] = (ImageButton) findViewById(R.id.imageButton3);
-        buttons[3] = (ImageButton) findViewById(R.id.imageButton4);
-        buttons[4] = (ImageButton) findViewById(R.id.imageButton5);
-        buttons[5] = (ImageButton) findViewById(R.id.imageButton6);
-        buttons[6] = (ImageButton) findViewById(R.id.imageButton7);
-        buttons[7] = (ImageButton) findViewById(R.id.imageButton8);
-        buttons[8] = (ImageButton) findViewById(R.id.imageButton9);
-
-        background = buttons[0].getBackground();
+        setUpButtons();
 
         for(int i=0; i<9; i++) {
             field[i]=-1;
@@ -53,14 +42,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void setTexts() {
         result.setTextColor(Color.BLACK);
-        result.setText("Player 1 is Red, Player 2 is Blue.");
+        result.setText("Player 1 is X, Player 2 is O.");
         if(player == 1) {
-            turn.setTextColor(Color.RED);
-        } else if (player == 2) {
             turn.setTextColor(Color.BLUE);
+        } else if (player == 2) {
+            turn.setTextColor(Color.RED);
         }
         turn.setText("It's the turn of Player "+player);
 
+    }
+
+    private void setUpButtons() {
+        buttons[0] = (ImageButton) findViewById(R.id.imageButton1);
+        buttons[1] = (ImageButton) findViewById(R.id.imageButton2);
+        buttons[2] = (ImageButton) findViewById(R.id.imageButton3);
+        buttons[3] = (ImageButton) findViewById(R.id.imageButton4);
+        buttons[4] = (ImageButton) findViewById(R.id.imageButton5);
+        buttons[5] = (ImageButton) findViewById(R.id.imageButton6);
+        buttons[6] = (ImageButton) findViewById(R.id.imageButton7);
+        buttons[7] = (ImageButton) findViewById(R.id.imageButton8);
+        buttons[8] = (ImageButton) findViewById(R.id.imageButton9);
     }
 
     private void setUpOnClickListeners(View v) {
@@ -71,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void theWinnerIs() {
         if(checkForWin(1)){
-            result.setTextColor(Color.RED);
+            result.setTextColor(Color.BLUE);
             result.setText("The winner is Player 1");
             turn.setText("");
             gameOver = true;
         } else if(checkForWin(2)) {
-            result.setTextColor(Color.BLUE);
+            result.setTextColor(Color.RED);
             result.setText("The winner is Player 2");
             turn.setText("");
             gameOver = true;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             field[i] = -1;
             clicked = 0;
             gameOver = false;
-            buttons[i].setBackground(background);
+            buttons[i].setImageResource(android.R.color.transparent);
             buttons[i].setEnabled(true);
         }
         setUpOnClickListeners(table);
@@ -130,12 +131,12 @@ public class MainActivity extends AppCompatActivity {
                 if (player == 1) {
                     field[btnNumber] = 1;
                     player = 2;
-                    buttons[btnNumber].setBackgroundColor(Color.RED);
+                    buttons[btnNumber].setImageResource(R.drawable.x);
                 }
                 else if (player == 2) {
                     field[btnNumber] = 2;
                     player = 1;
-                    buttons[btnNumber].setBackgroundColor(Color.BLUE);
+                    buttons[btnNumber].setImageResource(R.drawable.o);
                 }
                 buttons[btnNumber].setEnabled(false);
                 setTexts();
