@@ -10,7 +10,7 @@ import android.widget.TableLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout);
+    View table;
     ImageButton[] buttons = new ImageButton[9];
     int[] field = new int[9];
     int player = 0; //0 = X, 1 = O
@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        table = (View) findViewById(R.id.tableLayout);
 
         buttons[0] = (ImageButton) findViewById(R.id.imageButton1);
         buttons[1] = (ImageButton) findViewById(R.id.imageButton2);
@@ -34,14 +36,15 @@ public class MainActivity extends AppCompatActivity {
             field[i]=-1;
         }
 
-        //setUpOnClickListeners(tableLayout);
+        setUpOnClickListeners(table);
     }
 
-    /*private void setUpOnClickListeners(View v) {
+    private void setUpOnClickListeners(View v) {
         for(int i=0; i<9; i++) {
             buttons[i].setOnClickListener(new PlayOnClick(i));
         }
     }
+
 
     private class PlayOnClick implements View.OnClickListener {
 
@@ -53,20 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            Log.i("onClick Test", "button clicked (nmbr)"+btnNumber);
             if(field[btnNumber] == -1) {
                 if (player == 0) {
                     field[btnNumber] = 0;
                     player = 1;
+                    buttons[btnNumber].setBackgroundColor(Color.RED);
                 }
                 else if (player == 1) {
                     field[btnNumber] = 1;
                     player = 0;
+                    buttons[btnNumber].setBackgroundColor(Color.BLUE);
                 }
                 buttons[btnNumber].setEnabled(false);
-                buttons[btnNumber].setBackgroundColor(Color.RED);
-                Log.i("button test", "button clicked (nmbr)"+btnNumber);
             }
         }
-    }*/
+    }
 }
