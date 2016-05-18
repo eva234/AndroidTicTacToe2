@@ -12,9 +12,9 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/tableLayout">
+        android:id="@+id/tableLayout"
+        android:layout_below="@+id/turn"
+        android:layout_centerHorizontal="true">
 
         <TableRow
             android:layout_width="match_parent"
@@ -22,18 +22,18 @@
             android:id="@+id/row1">
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton1" />
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton2" />
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton3" />
         </TableRow>
 
@@ -43,18 +43,18 @@
             android:id="@+id/row2">
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton4" />
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton5" />
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton6" />
         </TableRow>
 
@@ -64,18 +64,18 @@
             android:id="@+id/row3">
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton7" />
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton8" />
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 android:id="@+id/imageButton9" />
         </TableRow>
     </TableLayout>
@@ -85,15 +85,15 @@
         android:layout_height="wrap_content"
         android:text="Reset"
         android:id="@+id/resetButton"
+        android:onClick="reset"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="reset"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/result"
-        android:textSize="14dp"
+        android:textSize="15dp"
         android:layout_below="@+id/resetButton"
         android:layout_centerHorizontal="true" />
 
@@ -103,7 +103,6 @@
         android:id="@+id/turn"
         android:layout_below="@+id/result"
         android:layout_centerHorizontal="true"
-        android:textSize="14dp"
-        android:textColor="@color/colorPrimary"/>
+        android:textSize="15dp" />
 
 </RelativeLayout>

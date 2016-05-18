@@ -1,7 +1,9 @@
 package com.example.evabrucksch.androidtictactoe2;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import static com.example.evabrucksch.androidtictactoe2.R.color.darkBlue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,13 +44,14 @@ public class MainActivity extends AppCompatActivity {
         setUpOnClickListeners(table);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void setTexts() {
         result.setTextColor(Color.BLACK);
         result.setText("Player 1 is X, Player 2 is O.");
         if(player == 1) {
-            turn.setTextColor(Color.BLUE);
+            turn.setTextColor(getResources().getColor(R.color.darkBlue, null));
         } else if (player == 2) {
-            turn.setTextColor(Color.RED);
+            turn.setTextColor(getResources().getColor(R.color.darkRed, null));
         }
         turn.setText("It's the turn of Player "+player);
 
