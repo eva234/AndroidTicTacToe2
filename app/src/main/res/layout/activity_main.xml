@@ -88,4 +88,22 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="reset"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/result"
+        android:textSize="14dp"
+        android:layout_below="@+id/resetButton"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/turn"
+        android:layout_below="@+id/result"
+        android:layout_centerHorizontal="true"
+        android:textSize="14dp"
+        android:textColor="@color/colorPrimary"/>
+
 </RelativeLayout>

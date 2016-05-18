@@ -1,21 +1,26 @@
 package com.example.evabrucksch.androidtictactoe2;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     View table;
     ImageButton[] buttons = new ImageButton[9];
     int[] field = new int[9];
-    int player = 0; //0 = X, 1 = O
+    int player = 1; //1 = X, 2 = O
     int clicked = 0;
     boolean gameOver = false;
+    TextView result;
+    TextView turn;
+    Drawable background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         table = (View) findViewById(R.id.tableLayout);
+        result = (TextView) findViewById(R.id.result);
+        turn = (TextView) findViewById(R.id.turn);
+        setTexts();
 
         buttons[0] = (ImageButton) findViewById(R.id.imageButton1);
         buttons[1] = (ImageButton) findViewById(R.id.imageButton2);
@@ -34,11 +42,25 @@ public class MainActivity extends AppCompatActivity {
         buttons[7] = (ImageButton) findViewById(R.id.imageButton8);
         buttons[8] = (ImageButton) findViewById(R.id.imageButton9);
 
+        background = buttons[0].getBackground();
+
         for(int i=0; i<9; i++) {
             field[i]=-1;
         }
 
         setUpOnClickListeners(table);
+    }
+
+    private void setTexts() {
+        result.setTextColor(Color.BLACK);
+        result.setText("Player 1 is Red, Player 2 is Blue.");
+        if(player == 1) {
+            turn.setTextColor(Color.RED);
+        } else if (player == 2) {
+            turn.setTextColor(Color.BLUE);
+        }
+        turn.setText("It's the turn of Player "+player);
+
     }
 
     private void setUpOnClickListeners(View v) {
@@ -48,17 +70,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void theWinnerIs() {
-        if(checkForWin(0)){
-            Log.i("winner", "The winner is Player 0");
+        if(checkForWin(1)){
+            result.setTextColor(Color.RED);
+            result.setText("The winner is Player 1");
+            turn.setText("");
             gameOver = true;
-        } else if(checkForWin(1)) {
-            Log.i("winner", "The winner is Player 1");
+        } else if(checkForWin(2)) {
+            result.setTextColor(Color.BLUE);
+            result.setText("The winner is Player 2");
+            turn.setText("");
             gameOver = true;
         } else if(clicked==9){
-            Log.i("winner", "Noone one this round, it's a tie.");
+            result.setTextColor(Color.BLACK);
+            result.setText("It's a tie.");
+            turn.setText("");
             gameOver = true;
-        } else {
-            Log.i("winner", "The game is not over yet.");
         }
     }
 
@@ -82,11 +108,11 @@ public class MainActivity extends AppCompatActivity {
             field[i] = -1;
             clicked = 0;
             gameOver = false;
-            buttons[i].setBackgroundColor(Color.BLACK);
+            buttons[i].setBackground(background);
             buttons[i].setEnabled(true);
         }
         setUpOnClickListeners(table);
-        Log.i("reset", "Reset Button clicked");
+        setTexts();
     }
 
 
@@ -101,17 +127,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             if(gameOver == false && field[btnNumber] == -1) {
-                if (player == 0) {
-                    field[btnNumber] = 0;
-                    player = 1;
+                if (player == 1) {
+                    field[btnNumber] = 1;
+                    player = 2;
                     buttons[btnNumber].setBackgroundColor(Color.RED);
                 }
-                else if (player == 1) {
-                    field[btnNumber] = 1;
-                    player = 0;
+                else if (player == 2) {
+                    field[btnNumber] = 2;
+                    player = 1;
                     buttons[btnNumber].setBackgroundColor(Color.BLUE);
                 }
                 buttons[btnNumber].setEnabled(false);
+                setTexts();
                 clicked++;
                 theWinnerIs();
             }
