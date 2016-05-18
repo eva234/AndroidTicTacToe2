@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton[] buttons = new ImageButton[9];
     int[] field = new int[9];
     int player = 0; //0 = X, 1 = O
+    int clicked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void theWinnerIs() {
+        if(checkForWin(0)){
+            Log.i("winner", "The winner is Player 0");
+        } else if(checkForWin(1)) {
+            Log.i("winner", "The winner is Player 1");
+        } else if(clicked==9){
+            Log.i("winner", "Noone one this round, it's a tie.");
+        } else {
+            Log.i("winner", "The game is not over yet.");
+        }
+    }
+
+    private boolean checkForWin(int p) {
+        if((field[0]==field[1] && field[1]==field[2] && field[2] == p) ||
+            (field[3]==field[4] && field[4]==field[5] && field[5] == p) ||
+            (field[6]==field[7] && field[7]==field[8] && field[8] == p) ||
+            (field[0]==field[4] && field[4]==field[8] && field[8] == p) ||
+            (field[2]==field[4] && field[4]==field[6] && field[6] == p) ||
+            (field[0]==field[3] && field[3]==field[6] && field[6] == p) ||
+            (field[1]==field[4] && field[4]==field[7] && field[7] == p) ||
+            (field[2]==field[5] && field[5]==field[8] && field[8] == p)) {
+                return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private class PlayOnClick implements View.OnClickListener {
 
@@ -68,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     buttons[btnNumber].setBackgroundColor(Color.BLUE);
                 }
                 buttons[btnNumber].setEnabled(false);
+                clicked++;
+                theWinnerIs();
             }
         }
     }
