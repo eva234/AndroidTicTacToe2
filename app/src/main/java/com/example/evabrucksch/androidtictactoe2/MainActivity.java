@@ -49,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
         result.setTextColor(Color.BLACK);
         result.setText("Player 1 is X, Player 2 is O.");
         if(player == 1) {
-            turn.setTextColor(getResources().getColor(R.color.darkBlue, null));
+            //turn.setTextColor(getResources().getColor(R.color.darkBlue, null));
+            turn.setTextColor(Color.BLUE);
         } else if (player == 2) {
-            turn.setTextColor(getResources().getColor(R.color.darkRed, null));
+            //turn.setTextColor(getResources().getColor(R.color.darkRed, null));
+            turn.setTextColor(Color.RED);
         }
         turn.setText("It's the turn of Player "+player);
 
